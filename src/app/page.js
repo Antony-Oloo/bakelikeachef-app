@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const [cakes, setCakes] = useState([]);
@@ -13,34 +14,51 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold text-center mb-6 text-pink-600">
-        Delicious Cakes for Every Occasion 🍰 
-        Made by Makoti
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {cakes.map((cake) => (
-          <motion.div whileHover={{ scale: 1.05 }} key={cake.id}>
-            <div className="rounded-2xl shadow-lg bg-white">
-              <img
-                src={cake.image}
-                alt={cake.name}
-                className="w-full h-48 object-cover rounded-t-2xl"
-              />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold">{cake.name}</h2>
-                <p className="text-gray-600">${cake.price}</p>
-                <button className="mt-4 w-full bg-pink-500 text-white py-2 rounded-xl hover:bg-pink-600">
-                  Order Now
-                </button>
+    <div>
+      <Navbar />
+      {/* Hero Section */}
+      <section className="bg-pink-100 py-16 text-center">
+        <h1 className="text-5xl font-extrabold text-pink-600 mb-4">
+          Delicious Cakes for Every Occasion 🎂
+        </h1>
+        <p className="text-lg text-gray-700">
+          Freshly baked, handcrafted cakes made just for you!
+        </p>
+        <button className="mt-6 px-6 py-3 bg-pink-500 text-white text-lg rounded-xl hover:bg-pink-600 transition">
+          Order Now
+        </button>
+      </section>
+
+      {/* Cake Listings */}
+      <div className="container mx-auto p-6">
+        <h2 className="text-3xl font-bold text-center mb-6 text-pink-600">
+          Our Best Cakes 🍰
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {cakes.map((cake) => (
+            <motion.div whileHover={{ scale: 1.05 }} key={cake.id}>
+              <div className="rounded-2xl shadow-lg bg-white">
+                <img
+                  src={cake.image}
+                  alt={cake.name}
+                  className="w-full h-48 object-cover rounded-t-2xl"
+                />
+                <div className="p-4">
+                  <h2 className="text-xl font-semibold">{cake.name}</h2>
+                  <p className="text-gray-600">${cake.price}</p>
+                  <button className="mt-4 w-full bg-pink-500 text-white py-2 rounded-xl hover:bg-pink-600">
+                    Order Now
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+
 
 
 

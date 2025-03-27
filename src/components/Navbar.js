@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
+import { useCartStore } from "@/store/cartStore";
+import { useState } from "react";
 
 export default function Navbar() {
+  const cart = useCartStore((state) => state.cart);
   const [search, setSearch] = useState("");
 
   return (
@@ -16,7 +18,7 @@ export default function Navbar() {
           BakeLikeAChef 🍰
         </Link>
 
-        {/* Search */}
+        {/* Search Bar */}
         <div className="flex-1 max-w-md mx-4">
           <input
             type="text"
@@ -27,13 +29,14 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Cart */}
+        {/* Cart Icon */}
         <Link href="/cart" className="relative">
           <ShoppingCart className="w-6 h-6 text-pink-600 hover:text-pink-800" />
-          {/* Cart item badge (can be dynamic later) */}
-          <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            2
-          </span>
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cart.length}
+            </span>
+          )}
         </Link>
       </div>
     </nav>
